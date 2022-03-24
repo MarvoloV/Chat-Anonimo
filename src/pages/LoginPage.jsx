@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import chat from '../assets/chat.jpg';
-import { postUser } from '../store/actions/userAction';
+import { addedUser } from '../store/actions/userAction';
 
 const ContainerContent = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = uuid();
-    dispatch(postUser(id, user));
+    dispatch(addedUser(id, user));
     navigate('/dashboard');
   };
   const handlerUser = (e) => {
