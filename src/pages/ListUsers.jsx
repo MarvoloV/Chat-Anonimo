@@ -3,7 +3,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
@@ -19,15 +19,23 @@ import {
   addUserToChat,
   findChat,
 } from '../store/actions/chatAction';
+import { getUsers } from '../store/actions/userAction';
 import DashboardPage from './DashboardPage';
 
 const ListUsers = () => {
   const { users, user } = useSelector((state) => state.userReducer);
+  const [loader, setLoader] = useState(false);
   const [nickName, setNickName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = users.filter((userL) => userL.id !== user.id);
-  const [usersList, setUsersList] = useState([...data]);
+  const [usersList, setUsersList] = useState([]);
+  useEffect(() => {
+    dispatch(getUsers());
+    setLoader(true);
+    setUsersList([...data]);
+  }, [loader]);
+
   const handlerChat = (idContact) => {
     const uuidChat = findChat(idContact, user.id);
     if (uuidChat) {

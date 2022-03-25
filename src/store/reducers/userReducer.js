@@ -3,6 +3,7 @@ import {
   LOAD_USER,
   UPDATE_USER,
   UPDATE_USERS,
+  LOAD_USERS,
 } from '../types/userTypes';
 
 const initialState = {
@@ -18,6 +19,8 @@ const userReducer = (state = initialState, action) => {
     case UPDATE_USER:
       return { ...state, user: action.payload };
     case UPDATE_USERS:
+      return { ...state, users: action.payload };
+    case LOAD_USERS:
       return { ...state, users: action.payload };
     default:
       return state;

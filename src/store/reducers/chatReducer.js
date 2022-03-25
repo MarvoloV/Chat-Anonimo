@@ -33,10 +33,3 @@ const chatReducer = (state = initialState, action) => {
 };
 
 export default chatReducer;
-/* {
-    id: uuid(),
-    users: [],
-    messages: [],
-    tipo,
-    category,
-  } */
