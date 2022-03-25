@@ -5,7 +5,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ItemList, Title, Container } from '../components/Components';
+import {
+  ItemList,
+  Title,
+  Container,
+  ChatContainer,
+} from '../components/Components';
 import {
   addUserToChat,
   findAllGroupChats,
@@ -36,7 +41,7 @@ const ChatsExistent = () => {
   return (
     <Container>
       <SideBar />
-      <div style={{ width: '90%' }}>
+      <ChatContainer>
         <Title>Selecciona el chat al que desear ingresar.</Title>
 
         {chatsGroup
@@ -61,7 +66,7 @@ const ChatsExistent = () => {
         ) : (
           <h3>No hay chats disponibles</h3>
         )}
-      </div>
+      </ChatContainer>
     </Container>
   );
 };

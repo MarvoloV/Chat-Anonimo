@@ -49,3 +49,6 @@ export const ItemList = styled.li`
   }
   cursor: pointer;
 `;
+export const ChatContainer = styled.div`
+  width: 90%;
+`;

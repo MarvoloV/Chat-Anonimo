@@ -7,12 +7,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
+import styled from 'styled-components';
 import {
   Button,
   Container,
   Input,
   Title,
   ItemList,
+  ChatContainer,
 } from '../components/Components';
 import {
   addedChat,
@@ -22,6 +24,10 @@ import {
 import { getUsers } from '../store/actions/userAction';
 import SideBar from '../components/SideBar';
 
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+`;
 const ListUsers = () => {
   const { users, user } = useSelector((state) => state.userReducer);
   const [loader, setLoader] = useState(false);
@@ -65,13 +71,10 @@ const ListUsers = () => {
   return (
     <Container>
       <SideBar />
-      <div style={{ width: '90%' }}>
+      <ChatContainer>
         <Title>Lista de Usuarios</Title>
 
-        <form
-          onSubmit={handlerSearch}
-          style={{ display: 'flex', alignItems: 'center' }}
-        >
+        <Form onSubmit={handlerSearch}>
           <Input
             type="text"
             placeholder="ingrese usuario a buscar"
@@ -79,7 +82,7 @@ const ListUsers = () => {
             onChange={(e) => setNickName(e.target.value)}
           />
           <Button type="submit">Buscar</Button>
-        </form>
+        </Form>
         <ul>
           {usersList.map((userL) => (
             <ItemList key={userL.id} onClick={() => handlerChat(userL.id)}>
@@ -87,7 +90,7 @@ const ListUsers = () => {
             </ItemList>
           ))}
         </ul>
-      </div>
+      </ChatContainer>
     </Container>
   );
 };

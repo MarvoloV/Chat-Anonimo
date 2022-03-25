@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useCallback, useEffect, useState } from 'react';
@@ -10,13 +11,26 @@ import useBroadcastChannel from '../utils/useBroadcastChannel';
 import { getChat } from '../store/actions/chatAction';
 import { findUserinListUsers } from '../store/actions/userAction';
 import { addedMessage, hiddendMessage } from '../utils/messageServices';
-import { Button, Input, Title } from '../components/Components';
+import { Button, Input, Title, Container } from '../components/Components';
 
 const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 90%;
+`;
+const ChatUser = styled.p`
+  font-size: 25px;
+  text-align: right;
+  padding: 25px;
+  cursor: pointer;
+`;
+const ChatFriend = styled.p`
+  font-size: 25px;
+`;
+const ContainerFriend = styled.div`
+  padding: 25px;
+  margin: 10px 0px;
 `;
 
 const ChatPage = () => {
@@ -53,13 +67,13 @@ const ChatPage = () => {
     setMessages(message);
   };
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <Container>
       <SideBar />
       <ChatContainer>
         <div>
           <Title>
             {chat.category
-              ? `chat ${chat.name}`
+              ? `chat Grupal ${chat.name}`
               : `chat con: ${friend.nickname}`}
           </Title>
           <div>
@@ -70,30 +84,17 @@ const ChatPage = () => {
               if (message.user === user.nickname) {
                 return (
                   <div key={message.id}>
-                    <h1
-                      style={{
-                        textAlign: 'right',
-                        padding: '25px',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => hiddenMessage(message.id)}
-                    >
+                    <ChatUser onClick={() => hiddenMessage(message.id)}>
                       {`${message.text} `}
                       <AiFillEyeInvisible />
-                    </h1>
+                    </ChatUser>
                   </div>
                 );
               }
               return (
-                <div
-                  key={message.id}
-                  style={{
-                    padding: '25px',
-                    margin: '10px 0px',
-                  }}
-                >
-                  <h1>{`${message.user}:${message.text}`}</h1>
-                </div>
+                <ContainerFriend key={message.id}>
+                  <ChatFriend>{`${message.user} : ${message.text}`}</ChatFriend>
+                </ContainerFriend>
               );
             })}
           </div>
@@ -110,7 +111,7 @@ const ChatPage = () => {
           </form>
         </div>
       </ChatContainer>
-    </div>
+    </Container>
   );
 };
 

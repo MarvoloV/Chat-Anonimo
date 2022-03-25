@@ -45,6 +45,14 @@ const Button = styled.button`
     cursor: default;
   }
 `;
+const TitleApp = styled.h2`
+  text-align: center;
+`;
+const Label = styled.label`
+  display: block;
+  font-weigh: bold;
+  margin-top: 10px;
+`;
 const LoginPage = () => {
   const [user, setUser] = useState(randomName());
   const navigate = useNavigate();
@@ -66,14 +74,9 @@ const LoginPage = () => {
       </div>
       <div>
         <h1>ID Bussiness Intelligence</h1>
-        <h2 style={{ textAlign: 'center' }}>CHAT ANONIMO</h2>
+        <TitleApp>CHAT ANONIMO</TitleApp>
         <form onSubmit={handleSubmit}>
-          <label
-            htmlFor="user"
-            style={{ display: 'block', fontWeigh: 'bold', marginTop: '10px' }}
-          >
-            NickName:
-          </label>
+          <Label htmlFor="user">NickName:</Label>
           <Input
             type="text"
             name="user"

@@ -5,7 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import styled from 'styled-components';
-import { ItemList, Title, Container } from '../components/Components';
+import {
+  ItemList,
+  Title,
+  Container,
+  ChatContainer,
+} from '../components/Components';
 import {
   addUserToChat,
   findAllGroupChats,
@@ -49,7 +54,7 @@ const ChatsGroup = () => {
   return (
     <Container>
       <SideBar />
-      <div style={{ width: '90%' }}>
+      <ChatContainer>
         <Title>Selecciona el chat al que desear ingresar.</Title>
         <LinkGroup to="/createchatgroup">
           Crear Chat Grupal
@@ -64,7 +69,7 @@ const ChatsGroup = () => {
         ) : (
           <h3>No hay chats disponibles</h3>
         )}
-      </div>
+      </ChatContainer>
     </Container>
   );
 };
