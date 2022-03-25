@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
+import randomName from 'node-random-name';
 import chat from '../assets/chat.jpg';
 import { addedUser } from '../store/actions/userAction';
 
@@ -45,7 +46,7 @@ const Button = styled.button`
   }
 `;
 const LoginPage = () => {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(randomName());
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -67,7 +68,10 @@ const LoginPage = () => {
         <h1>ID Bussiness Intelligence</h1>
         <h2 style={{ textAlign: 'center' }}>CHAT ANONIMO</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="user" style={{ display: 'block', fontWeigh: 'bold', marginTop: '10px' }}>
+          <label
+            htmlFor="user"
+            style={{ display: 'block', fontWeigh: 'bold', marginTop: '10px' }}
+          >
             NickName:
           </label>
           <Input

@@ -3,11 +3,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AiFillEyeInvisible } from 'react-icons/ai';
 import DashboardPage from './DashboardPage';
 import useBroadcastChannel from '../utils/useBroadcastChannel';
 import { getChat } from '../store/actions/chatAction';
 import { findUserinListUsers } from '../store/actions/userAction';
 import { addedMessage, hiddendMessage } from '../store/actions/messageAction';
+import { Button, Input, Title } from '../components/Components';
 
 const ChatPage = () => {
   const { chatid } = useParams();
@@ -43,41 +45,70 @@ const ChatPage = () => {
     setMessages(message);
   };
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       <DashboardPage />
-      <h1>
-        {chat.category
-          ? `chat ${chat.category}`
-          : `chat con: ${friend.nickname}`}
-      </h1>
-      {messages.map((message) => {
-        if (message.user === user.nickname && message.hidden === true) {
-          return '';
-        }
-        if (message.user === user.nickname) {
-          return (
-            <div key={message.id}>
-              <h1>{message.user}</h1>
-              <h2 onClick={() => hiddenMessage(message.id)}>{message.text}</h2>
-            </div>
-          );
-        }
-        return (
-          <div key={message.id}>
-            <h1>{message.user}</h1>
-            <h2>{message.text}</h2>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          width: '90%',
+        }}
+      >
+        <div>
+          <Title>
+            {chat.category
+              ? `chat ${chat.name}`
+              : `chat con: ${friend.nickname}`}
+          </Title>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {messages.map((message) => {
+              if (message.user === user.nickname && message.hidden === true) {
+                return '';
+              }
+              if (message.user === user.nickname) {
+                return (
+                  <div key={message.id}>
+                    <h1
+                      style={{
+                        textAlign: 'right',
+                        padding: '25px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => hiddenMessage(message.id)}
+                    >
+                      {`${message.text} `}
+                      <AiFillEyeInvisible />
+                    </h1>
+                  </div>
+                );
+              }
+              return (
+                <div
+                  key={message.id}
+                  style={{
+                    padding: '25px',
+                    margin: '10px 0px',
+                  }}
+                >
+                  <h1>{`${message.user}:${message.text}`}</h1>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-      <form onSubmit={handleSend}>
-        <input
-          type="text"
-          placeholder="Escribir Mensaje"
-          value={msg}
-          onChange={(e) => setMsg(e.target.value)}
-        />
-        <button type="submit">Enviar Mensaje</button>
-      </form>
+        </div>
+        <div>
+          <form onSubmit={handleSend}>
+            <Input
+              type="text"
+              placeholder="Escribir Mensaje"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value)}
+            />
+            <Button type="submit">Enviar Mensaje</Button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

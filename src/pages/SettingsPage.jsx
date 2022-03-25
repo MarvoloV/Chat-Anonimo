@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatedUser } from '../store/actions/userAction';
 import DashboardPage from './DashboardPage';
+import { Button, Container, Input } from '../components/Components';
 
 const SettingsPage = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -16,18 +17,24 @@ const SettingsPage = () => {
     dispatch(updatedUser(user.id, nickName));
   };
   return (
-    <div>
+    <Container>
       <DashboardPage />
-      <h1>Cambiar Nombre de Usuario</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="ingrese su NickName"
-          onChange={handlerNickName}
-        />
-        <button type="submit">Guardar</button>
-      </form>
-    </div>
+      <div style={{ width: '90%' }}>
+        <div style={{ margin: '200px' }}>
+          <h1 style={{ textAlign: 'center' }}>Cambiar Nombre de Usuario</h1>
+          <form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="ingrese su NickName"
+              onChange={handlerNickName}
+            />
+            <Button type="submit" disabled={!nickName}>
+              Guardar
+            </Button>
+          </form>
+        </div>
+      </div>
+    </Container>
   );
 };
 

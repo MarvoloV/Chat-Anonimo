@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable operator-linebreak */
 import { ADD_CHAT, UPDATE_CHAT } from '../types/chatTypes';
 
@@ -22,13 +24,14 @@ const saveChatinListChat = (id) => {
   chats.push(id);
   localStorage.setItem('chats', JSON.stringify(chats));
 };
-export const addedChat = (id, tipo, category = null) => {
+export const addedChat = (id, tipo, category = null, name = null) => {
   const chat = {
     id,
     users: [],
     messages: [],
     tipo,
     category,
+    name,
   };
   localStorage.setItem(chat.id, JSON.stringify(chat));
   saveChatinListChat(chat.id);
@@ -63,15 +66,36 @@ export const findChat = (idFriend, idUser) => {
 };
 export const findChatsOfUser = (idUser, tipo = 'privado') => {
   const chats = getChats();
+  const tmpchats = [];
   if (!chats) {
     return null;
   }
-  const chatPrivado = chats.map((idChat) => {
+  chats.forEach((idChat) => {
     const chat = getChat(idChat);
     if (chat.tipo === tipo && chat.users.find((user) => user === idUser)) {
-      return chat;
+      tmpchats.push(chat);
     }
-    return null;
   });
-  return chatPrivado;
+  return tmpchats;
+};
+export const findUserInChat = (idChat, idUser) => {
+  const chat = getChat(idChat);
+  if (chat.users.find((user) => user === idUser)) {
+    return true;
+  }
+  return null;
+};
+export const findAllGroupChats = () => {
+  const chats = getChats();
+  const tmpchats = [];
+  if (!chats) {
+    return null;
+  }
+  chats.forEach((element) => {
+    const chat = getChat(element);
+    if (chat.tipo === 'grupal') {
+      tmpchats.push(chat);
+    }
+  });
+  return tmpchats;
 };
