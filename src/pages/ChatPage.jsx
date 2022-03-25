@@ -9,7 +9,7 @@ import SideBar from '../components/SideBar';
 import useBroadcastChannel from '../utils/useBroadcastChannel';
 import { getChat } from '../store/actions/chatAction';
 import { findUserinListUsers } from '../store/actions/userAction';
-import { addedMessage, hiddendMessage } from '../store/actions/messageAction';
+import { addedMessage, hiddendMessage } from '../utils/messageServices';
 import { Button, Input, Title } from '../components/Components';
 
 const ChatContainer = styled.div`

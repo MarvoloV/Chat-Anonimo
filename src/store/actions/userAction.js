@@ -45,14 +45,7 @@ export const addedUser = (id, nickname) => {
   updatedUserList(user);
   return addUser(user);
 };
-export const updatedUser = (id, nickname) => {
-  const user = {
-    id,
-    nickname,
-  };
-  sessionStorage.setItem('user', JSON.stringify(user));
-  return updateUser(user);
-};
+
 export const getUsers = () => {
   const users = JSON.parse(window.localStorage.getItem('users'));
   return loadUsers(users);
@@ -61,4 +54,16 @@ export const findUserinListUsers = (uuid) => {
   const users = getUsers() ? getUsers() : [];
   const resultado = users.payload.find((user) => user.id === uuid);
   return resultado;
+};
+export const updatedUser = (id, nickname) => {
+  const user = {
+    id,
+    nickname,
+  };
+  sessionStorage.setItem('user', JSON.stringify(user));
+  const data = getUsers().payload;
+  const users = data.filter((us) => us.id !== user.id);
+  localStorage.setItem('users', JSON.stringify(users));
+  updatedUserList(user);
+  return updateUser(user);
 };
