@@ -1,16 +1,6 @@
-/* eslint-disable no-unused-vars */
 import uuid from 'react-uuid';
-import { ADD_MESSAGE, HIDDEN_MESSAGE } from '../types/messageTypes';
-import { getChat } from './chatAction';
+import { getChat } from '../store/actions/chatAction';
 
-const addMessage = (message) => ({
-  type: ADD_MESSAGE,
-  payload: message,
-});
-const HiddeMessage = (message) => ({
-  type: HIDDEN_MESSAGE,
-  payload: message,
-});
 export const addedMessage = (uuidChat, message, nickname) => {
   const tmpmessage = {
     id: uuid(),

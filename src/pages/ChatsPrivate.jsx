@@ -3,10 +3,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Title, ItemList } from '../components/Components';
+import {
+  Title,
+  ItemList,
+  Container,
+  ChatContainer,
+} from '../components/Components';
 import { findChatsOfUser } from '../store/actions/chatAction';
 import { findUserinListUsers, getUser } from '../store/actions/userAction';
-import DashboardPage from './DashboardPage';
+import SideBar from '../components/SideBar';
 
 const ChatsPrivate = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -21,9 +26,9 @@ const ChatsPrivate = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <DashboardPage />
-      <div style={{ width: '90%' }}>
+    <Container>
+      <SideBar />
+      <ChatContainer>
         <Title>Selecciona el chat al que desear ingresar.</Title>
 
         {chats ? (
@@ -41,8 +46,8 @@ const ChatsPrivate = () => {
         ) : (
           <h3>No hay chats disponibles</h3>
         )}
-      </div>
-    </div>
+      </ChatContainer>
+    </Container>
   );
 };
 

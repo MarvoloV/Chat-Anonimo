@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import DashboardPage from '../pages/DashboardPage';
+// import DashboardPage from '../pages/DashboardPage';
 import LoginPage from '../pages/LoginPage';
 import configureStore from '../store/index';
 import SettingsPage from '../pages/SettingsPage';
@@ -18,7 +18,7 @@ const AppRouter = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<ChatsExistent />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/listusers" element={<ListUsers />} />
         <Route path="/chatprivate" element={<ChatsPrivate />} />

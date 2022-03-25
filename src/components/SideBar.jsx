@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import ListOptions from '../components/ListOptions';
+import ListOptions from './ListOptions';
 
 const H2 = styled.h2`
   font-size: 50px;
@@ -14,7 +14,7 @@ const Options = [
   { id: 4, title: 'Chats', source: '/listchatexistent' },
   { id: 5, title: 'Ajustes', source: '/settings' },
 ];
-const DashboardPage = () => {
+const SideBar = () => {
   const { user } = useSelector((state) => state.userReducer);
   return (
     <div style={{ width: '300px', background: 'yellow', minHeight: '100vh' }}>
@@ -34,4 +34,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default SideBar;
