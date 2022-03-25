@@ -6,7 +6,7 @@ import uuid from 'react-uuid';
 import { Button, Container } from '../components/Components';
 import { addedChat, addUserToChat } from '../store/actions/chatAction';
 import { getUser } from '../store/actions/userAction';
-import DashboardPage from './DashboardPage';
+import SideBar from '../components/SideBar';
 
 const CreateChatGroup = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -28,14 +28,13 @@ const CreateChatGroup = () => {
   };
   return (
     <Container>
-      <DashboardPage />
+      <SideBar />
       <div style={{ width: '50%', margin: 'auto' }}>
         <form
           onSubmit={handleCreate}
           style={{
             display: 'flex',
             flexDirection: 'column',
-            /* alignItems: 'center', */
           }}
         >
           <label

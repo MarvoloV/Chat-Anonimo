@@ -4,12 +4,20 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AiFillEyeInvisible } from 'react-icons/ai';
-import DashboardPage from './DashboardPage';
+import styled from 'styled-components';
+import SideBar from '../components/SideBar';
 import useBroadcastChannel from '../utils/useBroadcastChannel';
 import { getChat } from '../store/actions/chatAction';
 import { findUserinListUsers } from '../store/actions/userAction';
 import { addedMessage, hiddendMessage } from '../store/actions/messageAction';
 import { Button, Input, Title } from '../components/Components';
+
+const ChatContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+`;
 
 const ChatPage = () => {
   const { chatid } = useParams();
@@ -46,22 +54,15 @@ const ChatPage = () => {
   };
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <DashboardPage />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          width: '90%',
-        }}
-      >
+      <SideBar />
+      <ChatContainer>
         <div>
           <Title>
             {chat.category
               ? `chat ${chat.name}`
               : `chat con: ${friend.nickname}`}
           </Title>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div>
             {messages.map((message) => {
               if (message.user === user.nickname && message.hidden === true) {
                 return '';
@@ -108,7 +109,7 @@ const ChatPage = () => {
             <Button type="submit">Enviar Mensaje</Button>
           </form>
         </div>
-      </div>
+      </ChatContainer>
     </div>
   );
 };

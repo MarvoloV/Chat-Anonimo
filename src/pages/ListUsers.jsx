@@ -20,7 +20,7 @@ import {
   findChat,
 } from '../store/actions/chatAction';
 import { getUsers } from '../store/actions/userAction';
-import DashboardPage from './DashboardPage';
+import SideBar from '../components/SideBar';
 
 const ListUsers = () => {
   const { users, user } = useSelector((state) => state.userReducer);
@@ -64,7 +64,7 @@ const ListUsers = () => {
   };
   return (
     <Container>
-      <DashboardPage />
+      <SideBar />
       <div style={{ width: '90%' }}>
         <Title>Lista de Usuarios</Title>
 

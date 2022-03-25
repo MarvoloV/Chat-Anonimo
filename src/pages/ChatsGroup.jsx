@@ -12,7 +12,7 @@ import {
   findUserInChat,
 } from '../store/actions/chatAction';
 import { getUser } from '../store/actions/userAction';
-import DashboardPage from './DashboardPage';
+import SideBar from '../components/SideBar';
 
 const LinkGroup = styled(Link)`
   display: block;
@@ -48,7 +48,7 @@ const ChatsGroup = () => {
 
   return (
     <Container>
-      <DashboardPage />
+      <SideBar />
       <div style={{ width: '90%' }}>
         <Title>Selecciona el chat al que desear ingresar.</Title>
         <LinkGroup to="/createchatgroup">
